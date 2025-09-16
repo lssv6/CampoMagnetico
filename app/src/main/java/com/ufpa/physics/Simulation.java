@@ -130,6 +130,9 @@ public class Simulation extends Component{
     public Simulation(){
         try{
             compass = ImageIO.read(getClass().getClassLoader().getResource("compass.png"));
+            AffineTransform af = AffineTransform.getScaleInstance(2, 2);
+            AffineTransformOp afop = new AffineTransformOp(af, AffineTransformOp.TYPE_BILINEAR);
+            compass = afop.filter(compass, null);
         }catch(IOException exception){
             System.exit(1);
         }
@@ -178,10 +181,10 @@ public class Simulation extends Component{
         try{drawCompasses(graphics);} catch(Exception e){}
         Point2D positive = magnet.getPositive();
         Point2D negative = magnet.getNegative();
-        graphics.setColor(Color.MAGENTA);
-        graphics.fillOval((int)positive.getX()-40, (int)positive.getY()-40, 80, 80);
-        graphics.setColor(Color.CYAN);
-        graphics.fillOval((int)negative.getX()-40, (int)negative.getY()-40, 80, 80);
+        //graphics.setColor(Color.MAGENTA);
+        //graphics.fillOval((int)positive.getX()-40, (int)positive.getY()-40, 80, 80);
+        //graphics.setColor(Color.CYAN);
+        //graphics.fillOval((int)negative.getX()-40, (int)negative.getY()-40, 80, 80);
         graphics.setStroke(magnetStroke);
         graphics.setColor(Color.LIGHT_GRAY);
         graphics.drawLine((int)positive.getX(), (int)positive.getY(), (int)negative.getX(), (int)negative.getY());
